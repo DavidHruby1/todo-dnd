@@ -1,0 +1,40 @@
+:root {
+    --ff: "Roboto", sans-serif;
+
+    --fs-sm: 0.8rem;
+    --fs-regular: 1rem;
+    --fs-md: 1.2rem;
+    --fs-lg: 1.5rem;
+    --fs-xl: 2rem;
+    --fs-xxl: 3rem;
+
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+    --fw-black: 900;
+
+    --text-clr: #000000;
+
+    --bg-clr: #fffbf7;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+    font-size: var(--fs-regular);
+}
+
+body {
+    margin: 0;
+    font-family: var(--ff);
+    line-height: 1.5;
+    color: var(--text-clr);
+    background-color: var(--bg-clr);
+}
