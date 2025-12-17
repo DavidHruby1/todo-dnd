@@ -28,18 +28,13 @@ const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
                 isEditing: false,
                 order: calcMaxOrder(state)
             };
-
             return [...state, newTask];
+            
         case "DELETE_TASK":
-            if (state.length === 0) return state;
+            return state.filter(t => t.id !== action.payload);
 
-            const filteredTasks: TodoList = state.filter(t => {
-                return t.id !== action.payload;
-            });
-
-            return filteredTasks;
         case "FINISH_TASK":
-            const updatedTasks: TodoList = state.map(t => {
+            return state.map(t => {
                 if (t.id === action.payload) {
                     return {
                         ...t,
@@ -47,11 +42,9 @@ const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
                         order: !t.isDone ? calcMaxOrder(state) : t.order
                     };
                 }
-
                 return t;
             });
 
-            return updatedTasks;
         default:
             return state;
     }
