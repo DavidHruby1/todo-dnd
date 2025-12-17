@@ -6,7 +6,7 @@ const ACTION_TYPES = {
     FINISH_TASK: "FINISH_TASK"
 } as const;
 
-type TodoAction = 
+export type TodoAction = 
     | { type: typeof ACTION_TYPES.ADD_TASK; payload: string; }
     | { type: typeof ACTION_TYPES.DELETE_TASK; payload: string; }
     | { type: typeof ACTION_TYPES.FINISH_TASK; payload: string; };
@@ -18,7 +18,7 @@ const calcMaxOrder = (state: TodoList): number => {
     return Math.max(...state.map(t => t.order)) + 1;
 };
 
-const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
+export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
     switch (action.type) {
         case "ADD_TASK":
             const newTask: TodoData = {
