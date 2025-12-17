@@ -4,7 +4,7 @@ import type { TodoList } from 'src/types/index';
 import type { TodoAction } from './todoReducer';
 
 
-type TodoContextType = {
+export type TodoContextType = {
     state: TodoList;
     dispatch: React.Dispatch<TodoAction>;
 };
