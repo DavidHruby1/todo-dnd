@@ -9,14 +9,13 @@
 }
 
 .todo-item-done {
+    padding: 1rem;
+    border: solid 1px #000000;
+    border-radius: 0.5rem;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 0.5rem;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     background-color: red;
 }
 

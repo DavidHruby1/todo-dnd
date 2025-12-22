@@ -11,8 +11,8 @@ export const TodoInput = () => {
     }
 
     const handleAddTask = (e: React.MouseEvent) => {
-        if (text === "") return;
         e.preventDefault();
+        if (text === "") return;
         dispatch({ type: "ADD_TASK", payload: text});
         setText("");
     }
