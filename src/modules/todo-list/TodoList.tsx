@@ -13,18 +13,21 @@ export const TodoList = () => {
     return (
         <div className={styles["todo-list-container"]}>
             <ul className={styles["todo-list"]}>
-                {state.map((task) => {
-                    return (
-                        <TodoItem 
-                            key={task.id}
-                            id={task.id}
-                            text={task.text}
-                            isDone={task.isDone}
-                            dispatch={dispatch}
-                            handleEdit={handleEdit}
-                        />
-                    );
-                })}
+                {[...state]
+                    .sort((a, b) => a.order - b.order)
+                    .map((task) => {
+                        return (
+                            <TodoItem 
+                                key={task.id}
+                                id={task.id}
+                                text={task.text}
+                                isDone={task.isDone}
+                                dispatch={dispatch}
+                                handleEdit={handleEdit}
+                            />
+                        );
+                    })
+                }
             </ul>
         </div>
     );
