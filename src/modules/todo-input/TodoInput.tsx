@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useTodo } from 'src/modules/common/context/todo/useTodo'
 import styles from './TodoInput.module.css';
 
+const MAX_TASK_LENGTH = 120;
+
 export const TodoInput = () => {
     const [text, setText] = useState<string>("");
     const { dispatch } = useTodo();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setText(e.currentTarget.value);
+        setText(e.currentTarget.value.slice(0, MAX_TASK_LENGTH));
     }
 
     const handleAddTask = (e: React.MouseEvent) => {
