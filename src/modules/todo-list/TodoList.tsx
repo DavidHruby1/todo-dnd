@@ -16,8 +16,24 @@ export const TodoList = () => {
                 {[...state]
                     .sort((a, b) => a.order - b.order)
                     .map((task) => {
+                        if (!task.isDone) {
+                            return (
+                                <TodoItem 
+                                    key={task.id}
+                                    id={task.id}
+                                    text={task.text}
+                                    isDone={task.isDone}
+                                    dispatch={dispatch}
+                                    handleEdit={handleEdit}
+                                />
+                            );
+                        }
+                    })
+                }
+                {state.map((task) => {
+                    if (task.isDone) {
                         return (
-                            <TodoItem 
+                            <TodoItem
                                 key={task.id}
                                 id={task.id}
                                 text={task.text}
@@ -26,8 +42,8 @@ export const TodoList = () => {
                                 handleEdit={handleEdit}
                             />
                         );
-                    })
-                }
+                    }
+                })}
             </ul>
         </div>
     );

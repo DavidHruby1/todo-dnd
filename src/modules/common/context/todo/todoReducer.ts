@@ -39,7 +39,7 @@ export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
                     return {
                         ...t,
                         isDone: !t.isDone,
-                        order: !t.isDone ? calcMaxOrder(state) : t.order
+                        // order: !t.isDone ? calcMaxOrder(state) : t.order
                     };
                 }
                 return t;
