@@ -29,7 +29,15 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, dispatch] = useReducer(todoReducer, getInitialData());
 
     useEffect(() => {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        const timer = setTimeout(() => {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            } catch (error) {
+                console.error("Error saving to localStorage: ", error);
+            }
+        }, 500);
+
+        return () => clearTimeout(timer);
     }, [state]);
 
     return (
