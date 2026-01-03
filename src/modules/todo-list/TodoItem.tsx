@@ -20,7 +20,7 @@ export const TodoItem = ({ id, text, isDone, dispatch, handleEdit }: TodoItemPro
                 >
                     Edit
                 </button>
-                <button 
+                    <button 
                     className={styles["todo-item-button"]}
                     onClick={ ()=> dispatch({type: "DELETE_TASK", payload: id}) }    
                 >

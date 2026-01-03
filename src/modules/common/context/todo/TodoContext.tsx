@@ -14,7 +14,18 @@ const getInitialData = (): TodoList => {
     const storageData = localStorage.getItem(STORAGE_KEY);
     if (storageData) {
         try {
-            return JSON.parse(storageData);
+            const parsedData = JSON.parse(storageData);
+            if (!Array.isArray(parsedData)) return [];
+            for (const item of parsedData) {
+                if (
+                    typeof item.id !== 'string' ||
+                    typeof item.text !== 'string' ||
+                    typeof item.isDone !== 'boolean' ||
+                    typeof item.isEditing !== 'boolean' ||
+                    typeof item.order !== 'number'
+                ) return [];
+            }
+            return parsedData;
         } catch (error) {
             console.error("Error when retrieving storage data: ", error);
             return [];
