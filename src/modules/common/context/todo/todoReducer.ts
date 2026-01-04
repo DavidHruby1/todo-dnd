@@ -3,13 +3,15 @@ import type { TodoData , TodoList } from 'src/types/index';
 const ACTION_TYPES = {
     ADD_TASK: "ADD_TASK",
     DELETE_TASK: "DELETE_TASK",
-    FINISH_TASK: "FINISH_TASK"
+    FINISH_TASK: "FINISH_TASK",
+    SYNC_STORAGE: "SYNC_STORAGE"
 } as const;
 
 export type TodoAction = 
     | { type: typeof ACTION_TYPES.ADD_TASK; payload: string; }
     | { type: typeof ACTION_TYPES.DELETE_TASK; payload: string; }
-    | { type: typeof ACTION_TYPES.FINISH_TASK; payload: string; };
+    | { type: typeof ACTION_TYPES.FINISH_TASK; payload: string; }
+    | { type: typeof ACTION_TYPES.SYNC_STORAGE; payload: TodoList; };
 
 
 const calcMaxOrder = (state: TodoList): number => {
@@ -44,6 +46,9 @@ export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
                 }
                 return t;
             });
+
+        case "SYNC_STORAGE":
+            return action.payload;
 
         default:
             return state;

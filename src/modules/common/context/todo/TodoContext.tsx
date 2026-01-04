@@ -40,6 +40,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, dispatch] = useReducer(todoReducer, getInitialData());
 
     useEffect(() => {
+        // debounce function for safe writing into the localStorage
         const timer = setTimeout(() => {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -50,6 +51,26 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
 
         return () => clearTimeout(timer);
     }, [state]);
+
+    // cross-tab sync
+    useEffect(() => {
+        const handleStorageChange = (e: StorageEvent): void => {
+            if (e.key === STORAGE_KEY && e.newValue) {
+                try {
+                    const newData = JSON.parse(e.newValue);
+                    dispatch({ type: "SYNC_STORAGE", payload: newData });
+                } catch (error) {
+                    console.error("Sync error, could not parse new storage data: ", error);
+                }
+            }
+        }
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return (() => {
+            window.removeEventListener('storage', handleStorageChange);
+        });
+    }, []);
 
     return (
         <TodoContext value={{ state, dispatch }}>
