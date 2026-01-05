@@ -18,7 +18,6 @@ export type TodoAction =
 
 const calcMaxOrder = (state: TodoList): number => {
     if (state.length === 0) return 1;
-
     return Math.max(...state.map(t => t.order)) + 1;
 };
 
@@ -35,17 +34,17 @@ export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
             return [...state, newTask];
             
         case "DELETE_TASK":
-            return state.filter(t => t.id !== action.payload);
+            return state.filter(task => task.id !== action.payload);
 
         case "FINISH_TASK":
-            return state.map(t => {
-                if (t.id === action.payload) {
+            return state.map(task => {
+                if (task.id === action.payload) {
                     return {
-                        ...t,
-                        isDone: !t.isDone,
+                        ...task,
+                        isDone: !task.isDone,
                     };
                 }
-                return t;
+                return task;
             });
 
         case "SYNC_STORAGE":
@@ -53,15 +52,15 @@ export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
 
         case "TOGGLE_TASK_EDITING":
             console.log("toggle editing on");
-            return state.map(t => {
-                if (t.id === action.payload.id) {
+            return state.map(task => {
+                if (task.id === action.payload.id) {
                     return {
-                        ...t,
+                        ...task,
                         text: action.payload.inputText,
-                        isEditing: !t.isEditing,
+                        isEditing: !task.isEditing,
                     };
                 }
-                return t;
+                return task;
             });
 
         default:

@@ -49,7 +49,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
                 console.error("Error saving to localStorage: ", error);
             }
         }, 500);
-
         return () => clearTimeout(timer);
     }, [state]);
 
@@ -65,9 +64,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
                 }
             }
         }
-
         window.addEventListener('storage', handleStorageChange);
-
         return (() => {
             window.removeEventListener('storage', handleStorageChange);
         });
