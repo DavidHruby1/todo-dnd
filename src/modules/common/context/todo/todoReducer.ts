@@ -4,14 +4,16 @@ const ACTION_TYPES = {
     ADD_TASK: "ADD_TASK",
     DELETE_TASK: "DELETE_TASK",
     FINISH_TASK: "FINISH_TASK",
-    SYNC_STORAGE: "SYNC_STORAGE"
+    SYNC_STORAGE: "SYNC_STORAGE",
+    TOGGLE_TASK_EDITING: "TOGGLE_TASK_EDITING",
 } as const;
 
 export type TodoAction = 
     | { type: typeof ACTION_TYPES.ADD_TASK; payload: string; }
     | { type: typeof ACTION_TYPES.DELETE_TASK; payload: string; }
     | { type: typeof ACTION_TYPES.FINISH_TASK; payload: string; }
-    | { type: typeof ACTION_TYPES.SYNC_STORAGE; payload: TodoList; };
+    | { type: typeof ACTION_TYPES.SYNC_STORAGE; payload: TodoList; }
+    | { type: typeof ACTION_TYPES.TOGGLE_TASK_EDITING; payload: Record<string, string>; }
 
 
 const calcMaxOrder = (state: TodoList): number => {
@@ -41,7 +43,6 @@ export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
                     return {
                         ...t,
                         isDone: !t.isDone,
-                        // order: !t.isDone ? calcMaxOrder(state) : t.order
                     };
                 }
                 return t;
@@ -49,6 +50,19 @@ export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
 
         case "SYNC_STORAGE":
             return action.payload;
+
+        case "TOGGLE_TASK_EDITING":
+            console.log("toggle editing on");
+            return state.map(t => {
+                if (t.id === action.payload.id) {
+                    return {
+                        ...t,
+                        text: action.payload.inputText,
+                        isEditing: !t.isEditing,
+                    };
+                }
+                return t;
+            });
 
         default:
             return state;

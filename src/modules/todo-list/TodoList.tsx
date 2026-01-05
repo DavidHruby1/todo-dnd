@@ -5,11 +5,6 @@ import styles from './TodoList.module.css';
 export const TodoList = () => {
     const { state, dispatch } = useTodo();
 
-    // Will implement later
-    const handleEdit = (id: string): void => {
-        console.log(`Editing task: ${id}`);
-    }
-
     return (
         <div className={styles["todo-list-container"]}>
             <ul className={styles["todo-list"]}>
@@ -23,8 +18,8 @@ export const TodoList = () => {
                                     id={task.id}
                                     text={task.text}
                                     isDone={task.isDone}
+                                    isEditing={task.isEditing}
                                     dispatch={dispatch}
-                                    handleEdit={handleEdit}
                                 />
                             );
                         }
@@ -38,8 +33,8 @@ export const TodoList = () => {
                                 id={task.id}
                                 text={task.text}
                                 isDone={task.isDone}
+                                isEditing={task.isEditing}
                                 dispatch={dispatch}
-                                handleEdit={handleEdit}
                             />
                         );
                     }

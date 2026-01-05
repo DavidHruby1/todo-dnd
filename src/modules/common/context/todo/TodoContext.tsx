@@ -44,6 +44,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
         const timer = setTimeout(() => {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                console.log("written to storage");
             } catch (error) {
                 console.error("Error saving to localStorage: ", error);
             }
