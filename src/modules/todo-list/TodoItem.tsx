@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useToast } from 'src/modules/common/context/toast/useToast';
 import type { TodoAction } from 'src/modules/common/context/todo/todoReducer.ts';
 import styles from './TodoItem.module.css';
 
@@ -20,9 +21,15 @@ export const TodoItem = ({
     dispatch 
 }: TodoItemProps) => {
     const [inputText, setInputText] = useState<string>(text);
+    const { showToast } = useToast();
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputText(e.currentTarget.value.slice(0, MAX_TASK_LENGTH));
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        const inputValue = e.currentTarget.value;
+        if (inputValue.length >= MAX_TASK_LENGTH && text.length < MAX_TASK_LENGTH) {
+            showToast('warning', `Task length can not exceed ${MAX_TASK_LENGTH} characters!`);
+            return;
+        } 
+        setInputText(inputValue.slice(0, MAX_TASK_LENGTH));
     }
 
     const handleEditing = (id: string, inputText: string): void => {

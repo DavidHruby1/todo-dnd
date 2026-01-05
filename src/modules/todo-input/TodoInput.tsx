@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTodo } from 'src/modules/common/context/todo/useTodo'
+import { useToast } from 'src/modules/common/context/toast/useToast';
 import styles from './TodoInput.module.css';
 
 const MAX_TASK_LENGTH = 120;
@@ -8,17 +9,29 @@ const MAX_TASKS = 100;
 export const TodoInput = () => {
     const [text, setText] = useState<string>("");
     const { state, dispatch } = useTodo();
+    const { showToast } = useToast();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setText(e.currentTarget.value.slice(0, MAX_TASK_LENGTH));
+        const inputValue = e.currentTarget.value;
+        if (inputValue.length >= MAX_TASK_LENGTH && text.length < MAX_TASK_LENGTH) {
+            showToast('warning', `Task length can not exceed ${MAX_TASK_LENGTH} characters!`);
+            return;
+        } 
+        setText(inputValue.slice(0, MAX_TASK_LENGTH));
     }
 
     const handleAddTask = (e: React.MouseEvent) => {
         e.preventDefault();
-        if (text === "") return;
+        if (text === "") {
+            showToast('warning', 'You can not add an empty task!');
+            return;
+        }
 
-        if (state.length === MAX_TASKS) return;
-
+        if (state.length === MAX_TASKS) {
+            showToast('error', `You can not have more than ${MAX_TASKS}!`);
+            return;
+        }
+        
         dispatch({ type: "ADD_TASK", payload: text});
         setText("");
     }

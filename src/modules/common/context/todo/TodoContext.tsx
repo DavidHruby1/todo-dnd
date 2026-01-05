@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect } from 'react';
 import { todoReducer } from './todoReducer';
+import { useToast } from '../toast/useToast';
 import type { TodoList } from 'src/types/index';
 import type { TodoAction } from './todoReducer';
 
@@ -38,15 +39,15 @@ export const TodoContext = createContext<TodoContextType | null>(null);
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, dispatch] = useReducer(todoReducer, getInitialData());
+    const { showToast } = useToast();
 
     useEffect(() => {
         // debounce function for safe writing into the localStorage
         const timer = setTimeout(() => {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-                console.log("written to storage");
             } catch (error) {
-                console.error("Error saving to localStorage: ", error);
+                showToast('error', `Error saving to localStorage: ${error}`);
             }
         }, 500);
         return () => clearTimeout(timer);
@@ -60,7 +61,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
                     const newData = JSON.parse(e.newValue);
                     dispatch({ type: "SYNC_STORAGE", payload: newData });
                 } catch (error) {
-                    console.error("Sync error, could not parse new storage data: ", error);
+                    showToast('error', `Error parsing storage data: ${error}`);
                 }
             }
         }

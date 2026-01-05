@@ -1,0 +1,31 @@
+.toast-item-error,
+.toast-item-warning {
+    padding: 1rem;
+    border: solid 1px #000000;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #808080;
+    width: 280px;
+    height: 60px;
+}
+
+.toast-item-error {
+    background-color: #ff6b6b;
+}
+
+.toast-item-warning {
+    background-color: #ffd93d;
+}
+
+.close-btn {
+    padding: 0.25rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

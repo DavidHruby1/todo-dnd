@@ -1,0 +1,14 @@
+.toast-container {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 300px;
+    height: 200px;
+    background-color: transparent;
+    border: solid 1px #000000;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem;
+}

@@ -51,7 +51,6 @@ export const todoReducer = (state: TodoList, action: TodoAction): TodoList => {
             return action.payload;
 
         case "TOGGLE_TASK_EDITING":
-            console.log("toggle editing on");
             return state.map(task => {
                 if (task.id === action.payload.id) {
                     return {
