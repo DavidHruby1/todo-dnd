@@ -17,6 +17,7 @@ export const toastReducer = (state: ToastList, action: ToastAction) => {
                 type: action.payload.type,
                 message: action.payload.message
             };
+            if (state.find(toast => toast.message === toast.message)) return state;
             return [...state, toast];
         
         case "HIDE_TOAST":

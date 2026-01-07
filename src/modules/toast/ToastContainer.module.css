@@ -1,6 +1,6 @@
 .toast-container {
     position: fixed;
-    bottom: 1rem;
+    top: 1rem;
     right: 1rem;
     width: 300px;
     height: 200px;
