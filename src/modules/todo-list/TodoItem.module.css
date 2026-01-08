@@ -28,7 +28,7 @@
     align-items: center;
     gap: 1rem;
     box-shadow: var(--shadow-md);
-    opacity: 0.7;
+    opacity: 0.85;
 }
 
 .todo-item-done p {
