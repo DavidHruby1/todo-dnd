@@ -1,36 +1,87 @@
 .todo-item {
-    padding: 1rem;
-    border: solid 1px #000000;
-    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--gray-300);
+    border-radius: 0.75rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-md);
+    transition: all 0.2s ease;
+}
+
+.todo-item:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-purple-light);
 }
 
 .todo-item-done {
-    padding: 1rem;
-    border: solid 1px #000000;
-    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--gray-300);
+    border-radius: 0.75rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: red;
+    gap: 1rem;
+    box-shadow: var(--shadow-md);
+    opacity: 0.7;
+}
+
+.todo-item-done p {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.todo-item p,
+.todo-item-done p {
+    flex: 1;
+    font-size: var(--fs-regular);
+    color: var(--text-primary);
+    word-break: break-word;
+}
+
+.todo-item input {
+    flex: 1;
+    height: 36px;
+    padding: 0 0.75rem;
+    font-size: var(--fs-regular);
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-purple-light);
+    border-radius: 0.5rem;
+}
+
+.todo-item input:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 3px rgb(224 212 252 / 0.25);
 }
 
 .todo-item-buttons {
     display: flex;
     gap: 0.5rem;
     align-items: center;
-    justify-content: center;
+    flex-shrink: 0;
 }
 
 .todo-item-button {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem;
     font-size: var(--fs-sm);
     font-weight: var(--fw-medium);
-    border: none;
-    border-radius: 0.25rem;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-purple-light);
+    border-radius: 0.5rem;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.todo-item-button:hover {
+    color: var(--text-primary);
+    background: var(--accent-purple-light);
+    border-color: var(--accent-purple);
 }

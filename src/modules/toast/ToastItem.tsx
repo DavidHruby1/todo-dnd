@@ -12,12 +12,12 @@ export const ToastItem = ({ type, message, onClose }: ToastItemProps) => {
     return (
         <div className={`${ type === 'error' ? styles['toast-item-error'] : styles['toast-item-warning'] }`}>
             <p>{message}</p>
-            <button 
+            <button
                 onClick={onClose}
-                className="close-btn" 
+                className={styles['close-btn']}
                 aria-label="Close"
             >
-                <X size={24} /> 
+                <X size={18} />
             </button>
         </div>
     );

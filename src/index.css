@@ -1,12 +1,12 @@
 :root {
-    --ff: "Roboto", sans-serif;
+    --ff: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-    --fs-sm: 0.8rem;
+    --fs-sm: 0.875rem;
     --fs-regular: 1rem;
-    --fs-md: 1.2rem;
+    --fs-md: 1.125rem;
     --fs-lg: 1.5rem;
     --fs-xl: 2rem;
-    --fs-xxl: 3rem;
+    --fs-xxl: 2.5rem;
 
     --fw-light: 300;
     --fw-regular: 400;
@@ -14,11 +14,42 @@
     --fw-semibold: 600;
     --fw-bold: 700;
     --fw-extrabold: 800;
-    --fw-black: 900;
 
-    --text-clr: #000000;
+    --gray-50: #faf9f6;
+    --gray-100: #f5f3f0;
+    --gray-200: #e8e5e0;
+    --gray-300: #d4cfc7;
+    --gray-400: #a8a29e;
+    --gray-500: #78716c;
+    --gray-600: #57534e;
+    --gray-700: #44403c;
+    --gray-800: #292524;
+    --gray-900: #1c1917;
 
-    --bg-clr: #fffbf7;
+    --cream-white: #f8f8f8;
+    --cream-light: #f0f0f0;
+    --accent-purple: #e0d4fc;
+    --accent-purple-light: #ede9fe;
+    --accent-purple-hover: #d4c4f7;
+    --accent-purple-dark: #a855f7;
+
+    --danger: #a8a29e;
+    --danger-hover: #78716c;
+    --success: #78716c;
+
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    --bg-primary: #fbfaff;
+    --bg-secondary: #f7f4fc;
+    --bg-grid: #f7f4fc;
+    --grid-dot: #d4cfc7;
+
+    --text-primary: #1c1917;
+    --text-secondary: #57534e;
+    --text-muted: #a8a29e;
 }
 
 * {
@@ -34,7 +65,19 @@ html {
 body {
     margin: 0;
     font-family: var(--ff);
-    line-height: 1.5;
-    color: var(--text-clr);
-    background-color: var(--bg-clr);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background-color: var(--bg-grid);
+    background-image: radial-gradient(var(--grid-dot) 1.35px, transparent 1.35px);
+    background-size: 27px 27px;
+    min-height: 100vh;
+}
+
+button {
+    font-family: inherit;
+    transition: all 0.2s ease;
+}
+
+input {
+    font-family: inherit;
 }

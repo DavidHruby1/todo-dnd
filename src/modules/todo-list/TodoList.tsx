@@ -9,7 +9,7 @@ export const TodoList = () => {
         <div className={styles["todo-list-container"]}>
             <ul className={styles["todo-list"]}>
                 {[...state]
-                    .sort((a, b) => a.order - b.order)
+                    .sort((a, b) => b.order - a.order)
                     .map((task) => {
                         if (!task.isDone) {
                             return (

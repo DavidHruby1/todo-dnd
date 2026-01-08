@@ -4,18 +4,24 @@
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    /* Temporary - responsive later */
-    width: 500px;
-    height: 160px;
-    background-color: lightgray;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem 1.5rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--gray-300);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-md);
 }
 
 .main-heading {
     font-size: var(--fs-xxl);
     font-weight: var(--fw-extrabold);
+    color: var(--text-primary);
+    letter-spacing: -0.025em;
 }
 
 .sub-heading {
-    font-size: var(--fs-lg);
+    font-size: var(--fs-md);
     font-weight: var(--fw-medium);
+    color: var(--text-secondary);
 }

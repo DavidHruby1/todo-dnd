@@ -2,22 +2,58 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    width: 600px;
-    height: 80px;
-    background-color: lightgray;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 500px;
+    padding: 0.75rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--gray-300);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-lg);
 }
 
 .task-input {
-    width: 70%;
-    height: 50px;
+    flex: 1;
+    height: 48px;
+    padding: 0 1rem;
+    font-size: var(--fs-regular);
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border: 1px solid var(--accent-purple-light);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.task-input:focus {
+    outline: none;
+    border-color: var(--accent-purple);
+    background: var(--bg-primary);
+    box-shadow: 0 0 0 3px rgb(224 212 252 / 0.25);
+}
+
+.task-input::placeholder {
+    color: var(--text-muted);
 }
 
 .add-task-button {
-    width: 60px;
-    height: 50px;
-    background-color: darkgray;
+    height: 48px;
+    padding: 0 1.5rem;
+    font-size: var(--fs-regular);
+    font-weight: var(--fw-semibold);
+    color: white;
+    background: var(--gray-900);
     border: none;
+    border-radius: 0.5rem;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.add-task-button:hover {
+    background: var(--gray-700);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.add-task-button:active {
+    transform: translateY(0);
 }
