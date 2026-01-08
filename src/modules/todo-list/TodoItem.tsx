@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useToast } from 'src/modules/common/context/toast/useToast';
+import { useModal } from 'src/modules/common/context/modal/useModal';
 import type { TodoAction } from 'src/modules/common/context/todo/todoReducer.ts';
 import styles from './TodoItem.module.css';
 
@@ -18,10 +19,11 @@ export const TodoItem = ({
     text, 
     isDone, 
     isEditing, 
-    dispatch 
+    dispatch
 }: TodoItemProps) => {
     const [inputText, setInputText] = useState<string>(text);
     const { showToast } = useToast();
+    const { showModal, hideModal } = useModal();
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const inputValue = e.currentTarget.value;
@@ -47,6 +49,17 @@ export const TodoItem = ({
         }
     }
 
+    const handleClickDelete = () => {
+        showModal({
+            type: "delete-modal",
+            text: "Are you sure you want to remove this task?",
+            onConfirm: () => {
+                dispatch({ type: "DELETE_TASK", payload: id })
+                hideModal();
+            }
+        });
+    };
+
     return (
         <li className={`${ isDone ? styles['todo-item-done'] : styles['todo-item']}`}>
             { isEditing ? (
@@ -71,7 +84,7 @@ export const TodoItem = ({
                 </button>
                     <button 
                     className={styles["todo-item-button"]}
-                    onClick={ ()=> dispatch({type: "DELETE_TASK", payload: id}) }    
+                    onClick={ handleClickDelete }    
                 >
                     Delete
                 </button>
