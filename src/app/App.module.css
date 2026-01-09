@@ -22,3 +22,7 @@
     background-color: var(--button-bg);
     cursor: pointer;
 }
+
+.theme-button-dark {
+    color: white;
+}

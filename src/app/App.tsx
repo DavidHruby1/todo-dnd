@@ -74,10 +74,10 @@ function App() {
             <ToastProvider>
                 <TodoProvider>
                     <button
-                        className={styles["theme-button"]}
+                        className={`${styles["theme-button"]} ${theme === 'dark' ? styles["theme-button-dark"] : ""}`}
                         onClick={ themeChange }
                     >
-                        { theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}    
+                        { theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
                     </button>
                     <div className={styles["app-container"]}>
                         <TodoHeader />

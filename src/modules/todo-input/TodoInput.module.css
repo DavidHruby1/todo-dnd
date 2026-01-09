@@ -7,7 +7,7 @@
     max-width: 500px;
     padding: 0.75rem;
     background: var(--bg-primary);
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--border-visible);
     border-radius: 1rem;
     box-shadow: var(--shadow-lg);
 }
@@ -28,7 +28,7 @@
     outline: none;
     border-color: var(--accent-purple);
     background: var(--bg-primary);
-    box-shadow: 0 0 0 3px rgb(224 212 252 / 0.25);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-purple) 25%, transparent);
 }
 
 .task-input::placeholder {
@@ -56,4 +56,14 @@
 
 .add-task-button:active {
     transform: translateY(0);
+}
+
+[data-theme="dark"] .add-task-button {
+    background: #262626;
+    border-color: #52525b;
+}
+
+[data-theme="dark"] .add-task-button:hover {
+    background: #404040;
+    border-color: #71717a;
 }

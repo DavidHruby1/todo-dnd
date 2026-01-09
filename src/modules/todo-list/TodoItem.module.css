@@ -1,7 +1,7 @@
 .todo-item {
     padding: 1rem 1.25rem;
     background: var(--bg-primary);
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--border-visible);
     border-radius: 0.75rem;
     display: flex;
     flex-direction: row;
@@ -14,13 +14,19 @@
 
 .todo-item:hover {
     box-shadow: var(--shadow-md);
-    border-color: var(--accent-purple-light);
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-purple) 25%, transparent);
+}
+
+[data-theme="dark"] .todo-item:hover {
+    border-color: #71717a;
+    box-shadow: 0 0 0 2px color-mix(in srgb, #71717a 30%, transparent);
 }
 
 .todo-item-done {
     padding: 1rem 1.25rem;
-    background: var(--bg-secondary);
-    border: 1px solid var(--gray-300);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-visible);
     border-radius: 0.75rem;
     display: flex;
     flex-direction: row;
@@ -28,7 +34,13 @@
     align-items: center;
     gap: 1rem;
     box-shadow: var(--shadow-md);
-    opacity: 0.85;
+    opacity: 0.45;
+}
+
+[data-theme="dark"] .todo-item-done {
+    background: #050505;
+    border-color: #262626;
+    opacity: 0.6;
 }
 
 .todo-item-done p {
@@ -58,7 +70,7 @@
 .todo-item input:focus {
     outline: none;
     border-color: var(--accent-purple);
-    box-shadow: 0 0 0 3px rgb(224 212 252 / 0.25);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-purple) 25%, transparent);
 }
 
 .todo-item-buttons {

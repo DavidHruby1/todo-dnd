@@ -57,7 +57,7 @@
     padding: 0.75rem 1.5rem;
     font-size: var(--fs-sm);
     font-weight: var(--fw-semibold);
-    border: 1px solid var(--gray-300);
+    border: 1px solid var(--border-visible);
     border-radius: 0.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -84,4 +84,14 @@
     border-color: var(--gray-700);
     transform: translateY(-1px);
     box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] .button:last-child {
+    background: #262626;
+    border-color: #52525b;
+}
+
+[data-theme="dark"] .button:last-child:hover {
+    background: #404040;
+    border-color: #71717a;
 }
