@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect } from 'react';
 import { todoReducer } from './todoReducer';
 import { useToast } from '../toast/useToast';
-import type { TodoList } from 'src/types/index';
+import type { TodoList, TodoData } from 'src/types/index';
 import type { TodoAction } from './todoReducer';
 
 const STORAGE_KEY = "todoStorage";
@@ -11,22 +11,32 @@ export type TodoContextType = {
     dispatch: React.Dispatch<TodoAction>;
 };
 
+// Type guard function to validate TodoList structure
+const isValidTodoList = (data: unknown): data is TodoList => {
+    if (!Array.isArray(data)) return false;
+
+    for (const item of data) {
+        if (
+            typeof item !== 'object' ||
+            item === null ||
+            typeof (item as TodoData).id !== 'string' ||
+            typeof (item as TodoData).text !== 'string' ||
+            typeof (item as TodoData).isDone !== 'boolean' ||
+            typeof (item as TodoData).isEditing !== 'boolean' ||
+            typeof (item as TodoData).order !== 'number'
+        ) {
+            return false;
+        }
+    }
+    return true;
+};
+
 const getInitialData = (): TodoList => {
     const storageData = localStorage.getItem(STORAGE_KEY);
     if (storageData) {
         try {
             const parsedData = JSON.parse(storageData);
-            if (!Array.isArray(parsedData)) return [];
-            for (const item of parsedData) {
-                if (
-                    typeof item.id !== 'string' ||
-                    typeof item.text !== 'string' ||
-                    typeof item.isDone !== 'boolean' ||
-                    typeof item.isEditing !== 'boolean' ||
-                    typeof item.order !== 'number'
-                ) return [];
-            }
-            return parsedData;
+            return isValidTodoList(parsedData) ? parsedData : [];
         } catch (error) {
             console.error("Error when retrieving storage data: ", error);
             return [];
@@ -59,7 +69,12 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
             if (e.key === STORAGE_KEY && e.newValue) {
                 try {
                     const newData = JSON.parse(e.newValue);
-                    dispatch({ type: "SYNC_STORAGE", payload: newData });
+                    // Validate before dispatching - same as getInitialData
+                    if (isValidTodoList(newData)) {
+                        dispatch({ type: "SYNC_STORAGE", payload: newData });
+                    } else {
+                        showToast('error', 'Invalid todo data received from storage');
+                    }
                 } catch (error) {
                     showToast('error', `Error parsing storage data: ${error}`);
                 }
