@@ -23,3 +23,5 @@ export type ModalData = {
     text: string;
     onConfirm: () => void;
 };
+
+export type ThemeType = 'light' | 'dark';

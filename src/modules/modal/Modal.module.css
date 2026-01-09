@@ -74,12 +74,14 @@
 }
 
 .button:last-child {
-    background: var(--danger);
-    color: var(--bg-primary);
-    border-color: var(--danger);
+    color: white;
+    background: var(--gray-900);
+    border-color: var(--gray-900);
 }
 
 .button:last-child:hover {
-    background: var(--danger-hover);
-    border-color: var(--danger-hover);
+    background: var(--gray-700);
+    border-color: var(--gray-700);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
