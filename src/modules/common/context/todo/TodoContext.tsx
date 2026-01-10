@@ -1,7 +1,7 @@
-import { createContext, useReducer, useEffect } from 'react';
+import { createContext, useReducer, useEffect, useState } from 'react';
 import { todoReducer } from './todoReducer';
 import { useToast } from '../toast/useToast';
-import type { TodoList, TodoData } from 'src/types/index';
+import type { TodoList } from 'src/types/index';
 import type { TodoAction } from './todoReducer';
 
 const STORAGE_KEY = "todoStorage";
@@ -9,9 +9,9 @@ const STORAGE_KEY = "todoStorage";
 export type TodoContextType = {
     state: TodoList;
     dispatch: React.Dispatch<TodoAction>;
+    setIsDragging: (flag: boolean) => void;
 };
 
-// Type guard function to validate TodoList structure
 const isValidTodoList = (data: unknown): data is TodoList => {
     if (!Array.isArray(data)) return false;
 
@@ -19,14 +19,12 @@ const isValidTodoList = (data: unknown): data is TodoList => {
         if (
             typeof item !== 'object' ||
             item === null ||
-            typeof (item as TodoData).id !== 'string' ||
-            typeof (item as TodoData).text !== 'string' ||
-            typeof (item as TodoData).isDone !== 'boolean' ||
-            typeof (item as TodoData).isEditing !== 'boolean' ||
-            typeof (item as TodoData).order !== 'number'
-        ) {
-            return false;
-        }
+            !('id' in item) || typeof item.id !== 'string' ||
+            !('text' in item) || typeof item.text !== 'string' ||
+            !('isDone' in item) || typeof item.isDone !== 'boolean' ||
+            !('isEditing' in item) || typeof item.isEditing !== 'boolean' ||
+            !('order' in item) || typeof item.order !== 'number'
+        ) return false;
     }
     return true;
 };
@@ -49,19 +47,23 @@ export const TodoContext = createContext<TodoContextType | null>(null);
 
 export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     const [state, dispatch] = useReducer(todoReducer, getInitialData());
+    // isDragging is a global flag that stops saving to localStorage while dragging a task
+    const [isDragging, setIsDragging] = useState<boolean>(false);
     const { showToast } = useToast();
 
     useEffect(() => {
         // debounce function for safe writing into the localStorage
         const timer = setTimeout(() => {
             try {
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                if (!isDragging) {
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                }
             } catch (error) {
                 showToast('error', `Error saving to localStorage: ${error}`);
             }
         }, 500);
         return () => clearTimeout(timer);
-    }, [state]);
+    }, [state, isDragging]);
 
     // cross-tab sync
     useEffect(() => {
@@ -69,7 +71,6 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
             if (e.key === STORAGE_KEY && e.newValue) {
                 try {
                     const newData = JSON.parse(e.newValue);
-                    // Validate before dispatching - same as getInitialData
                     if (isValidTodoList(newData)) {
                         dispatch({ type: "SYNC_STORAGE", payload: newData });
                     } else {
@@ -87,7 +88,7 @@ export const TodoProvider = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <TodoContext value={{ state, dispatch }}>
+        <TodoContext value={{ state, dispatch, setIsDragging }}>
             { children }
         </TodoContext>
     );

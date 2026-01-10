@@ -1,9 +1,11 @@
 import { useTodo } from 'src/modules/common/context/todo/useTodo'
 import { TodoItem } from './TodoItem';
+import { useTodoDrag } from './hooks/useTodoDrag';
 import styles from './TodoList.module.css';
 
 export const TodoList = () => {
     const { state, dispatch } = useTodo();
+    const { handleDragStart, handleDragOver, handleDragEnd } = useTodoDrag();
 
     return (
         <div className={styles["todo-list-container"]}>
@@ -20,6 +22,9 @@ export const TodoList = () => {
                                     isDone={task.isDone}
                                     isEditing={task.isEditing}
                                     dispatch={dispatch}
+                                    handleDragStart={handleDragStart}
+                                    handleDragOver={handleDragOver}
+                                    handleDragEnd={handleDragEnd}
                                 />
                             );
                         }

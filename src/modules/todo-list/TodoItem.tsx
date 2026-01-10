@@ -12,6 +12,9 @@ type TodoItemProps = {
     isDone: boolean;
     isEditing: boolean;
     dispatch: React.Dispatch<TodoAction>;
+    handleDragStart?: (id: string) => void;
+    handleDragOver?: (e: React.DragEvent, id: string) => void;
+    handleDragEnd?: (e: React.DragEvent) => void;
 };
 
 export const TodoItem = ({ 
@@ -19,7 +22,10 @@ export const TodoItem = ({
     text, 
     isDone, 
     isEditing, 
-    dispatch
+    dispatch,
+    handleDragStart,
+    handleDragOver,
+    handleDragEnd
 }: TodoItemProps) => {
     const [inputText, setInputText] = useState<string>(text);
     const { showToast } = useToast();
@@ -61,7 +67,14 @@ export const TodoItem = ({
     };
 
     return (
-        <li className={`${ isDone ? styles['todo-item-done'] : styles['todo-item']}`}>
+        <li
+            id={id}
+            className={ isDone ? styles['todo-item-done'] : styles['todo-item'] }
+            draggable={ isDone ? false : true }
+            onDragStart={ () => { if (handleDragStart) handleDragStart(id) }}
+            onDragOver={ (e) => { if (handleDragOver) handleDragOver(e, id) }}
+            onDragEnd={ (e) => { if (handleDragEnd) handleDragEnd(e) }}
+        >
             { isEditing ? (
                 <input
                     autoFocus
