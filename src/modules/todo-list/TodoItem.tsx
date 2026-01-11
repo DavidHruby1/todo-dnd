@@ -12,7 +12,7 @@ type TodoItemProps = {
     isDone: boolean;
     isEditing: boolean;
     dispatch: React.Dispatch<TodoAction>;
-    handleDragStart?: (id: string) => void;
+    handleDragStart?: (e: React.DragEvent, id: string) => void;
     handleDragOver?: (e: React.DragEvent, id: string) => void;
     handleDragEnd?: (e: React.DragEvent) => void;
 };
@@ -71,7 +71,7 @@ export const TodoItem = ({
             id={id}
             className={ isDone ? styles['todo-item-done'] : styles['todo-item'] }
             draggable={ isDone ? false : true }
-            onDragStart={ () => { if (handleDragStart) handleDragStart(id) }}
+            onDragStart={ (e) => { if (handleDragStart) handleDragStart(e, id) }}
             onDragOver={ (e) => { if (handleDragOver) handleDragOver(e, id) }}
             onDragEnd={ (e) => { if (handleDragEnd) handleDragEnd(e) }}
         >
