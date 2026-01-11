@@ -28,6 +28,7 @@ export const TodoItem = ({
     handleDragEnd
 }: TodoItemProps) => {
     const [inputText, setInputText] = useState<string>(text);
+    const [isDraggingThis, setIsDraggingThis] = useState(false);
     const { showToast } = useToast();
     const { showModal, hideModal } = useModal();
 
@@ -66,14 +67,24 @@ export const TodoItem = ({
         });
     };
 
+    const onDragStartLocal = (e: React.DragEvent) => {
+        if (handleDragStart) handleDragStart(e, id);
+        setTimeout(() => setIsDraggingThis(true), 0);
+    };
+
+    const onDragEndLocal = (e: React.DragEvent) => {
+        if (handleDragEnd) handleDragEnd(e);
+        setIsDraggingThis(false);
+    };
+
     return (
         <li
             id={id}
-            className={ isDone ? styles['todo-item-done'] : styles['todo-item'] }
+            className={ isDone ? styles['todo-item-done'] : isDraggingThis ? `${styles['todo-item']} ${styles['dragging']}` : styles['todo-item'] }
             draggable={ isDone ? false : true }
-            onDragStart={ (e) => { if (handleDragStart) handleDragStart(e, id) }}
+            onDragStart={ onDragStartLocal }
             onDragOver={ (e) => { if (handleDragOver) handleDragOver(e, id) }}
-            onDragEnd={ (e) => { if (handleDragEnd) handleDragEnd(e) }}
+            onDragEnd={ onDragEndLocal }
         >
             { isEditing ? (
                 <input

@@ -97,3 +97,17 @@
     background: var(--accent-purple-light);
     border-color: var(--accent-purple);
 }
+
+.dragging {
+    opacity: 0.7;
+    transform: scale(0.95);
+    background: var(--gray-100);
+    border: 2px dashed var(--gray-300);
+    box-shadow: none;
+    filter: grayscale(100%);
+}
+
+[data-theme="dark"] .dragging {
+    background: var(--gray-100);
+    border-color: var(--gray-300);
+}
