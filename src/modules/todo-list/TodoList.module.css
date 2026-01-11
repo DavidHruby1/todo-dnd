@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     width: 100%;
-    max-width: 500px;
+    max-width: 650px;
     margin-top: auto;
     max-height: calc(100vh - 280px);
     overflow-y: auto;
