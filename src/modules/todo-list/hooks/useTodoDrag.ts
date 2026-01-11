@@ -28,8 +28,8 @@ export const useTodoDrag = (): DragHandlers => {
         const itemBelowY = itemBelowRect.top;
         const itemBelowHeight = itemBelowRect.height;
         const itemBelowMiddle = itemBelowHeight / 2;
-        const itemBelowThresholdHigher = itemBelowMiddle + (itemBelowMiddle / 2);
-        const itemBelowThresholdLower = itemBelowMiddle - (itemBelowMiddle / 2);
+        const itemBelowThresholdHigher = itemBelowMiddle + (itemBelowMiddle / 4);
+        const itemBelowThresholdLower = itemBelowMiddle - (itemBelowMiddle / 4);
         const ghostMiddleRelativeToItemBelow = ghostMiddleY - itemBelowY;
 
         // Get order values of both elements
