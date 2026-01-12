@@ -4,7 +4,7 @@ import { useModal } from 'src/modules/common/context/modal/useModal';
 import type { TodoAction } from 'src/modules/common/context/todo/todoReducer.ts';
 import styles from './TodoItem.module.css';
 
-const MAX_TASK_LENGTH = 120;
+const MAX_TASK_LENGTH = 50;
 
 type TodoItemProps = {
     id: string;

@@ -3,7 +3,7 @@ import { useTodo } from 'src/modules/common/context/todo/useTodo'
 import { useToast } from 'src/modules/common/context/toast/useToast';
 import styles from './TodoInput.module.css';
 
-const MAX_TASK_LENGTH = 40;
+const MAX_TASK_LENGTH = 50;
 const MAX_TASKS = 20;
 
 export const TodoInput = () => {
