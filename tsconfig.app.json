@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "composite": true,
     "baseUrl": ".",
     "paths": {
       "src/*": ["./src/*"]
@@ -9,7 +10,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest"],
     "skipLibCheck": true,
 
     /* Bundler mode */
