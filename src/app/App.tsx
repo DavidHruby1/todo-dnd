@@ -75,6 +75,7 @@ function App() {
                 <TodoProvider>
                     <button
                         className={`${styles["theme-button"]} ${theme === 'dark' ? styles["theme-button-dark"] : ""}`}
+                        aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
                         onClick={ themeChange }
                     >
                         { theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
