@@ -1,4 +1,4 @@
-# ✅ Todo Drag & Drop
+# 📝 Todo Drag & Drop
 
 A React application featuring **native drag-and-drop**, **cross-tab synchronization**, and **runtime type safety**.
 
