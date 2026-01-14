@@ -28,6 +28,21 @@ pnpm dev            # or: npm run dev
 - **Inline Editing:** Double-click to edit tasks without modal interruptions.
 - **Architecture:** Built with Context + `useReducer` for scalable state management without Redux bloat.
 
+## 📂 Project Structure
+
+I organized the codebase by **feature** (domain-driven) rather than file type. This ensures that related logic, styles, and tests are co-located, making the codebase easier to scale.
+
+```text
+src/
+├── modules/
+│   ├── common/           # Shared Contexts (Todo, Toast, Modal) & Hooks
+│   ├── todo-list/        # List rendering & Drag-and-Drop logic
+│   ├── todo-input/       # Input form & validation
+│   └── header/           # Layout components
+├── types/                # Shared TypeScript definitions
+└── app/                  # App entry point
+```
+
 ## 🧠 Engineering Decisions (Why I built it this way)
 
 ### 1. State Management: Context vs. Redux
@@ -52,9 +67,20 @@ I treat `localStorage` as an external API (an untrusted source). Before hydratin
 
 ```ts
 const isValidTodoList = (data: unknown): data is TodoList => {
-  // Verifies array structure and property types before app load
-  // Prevents white-screen crashes from malformed storage data
-  return Array.isArray(data) && data.every((item) => typeof item?.id === "string" && typeof item?.text === "string");
+    if (!Array.isArray(data)) return false;
+
+    for (const item of data) {
+        if (
+            typeof item !== 'object' ||
+            item === null ||
+            !('id' in item) || typeof item.id !== 'string' ||
+            !('text' in item) || typeof item.text !== 'string' ||
+            !('isDone' in item) || typeof item.isDone !== 'boolean' ||
+            !('isEditing' in item) || typeof item.isEditing !== 'boolean' ||
+            !('order' in item) || typeof item.order !== 'number'
+        ) return false;
+    }
+    return true;
 };
 ```
 
