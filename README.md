@@ -7,6 +7,8 @@ https://github.com/user-attachments/assets/2e6b1395-8642-4d6d-8ccd-bcaca46cf6c1
 
 ## 🚀 Quick Start
 
+**Prerequisites:** Node.js 18+
+
 ```bash
 git clone https://github.com/DavidHruby1/todo-dnd.git
 cd todo-dnd
