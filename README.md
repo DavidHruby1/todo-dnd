@@ -2,7 +2,8 @@
 
 A React application featuring **native drag-and-drop**, **cross-tab synchronization**, and **runtime type safety**.
 
-[![Demo Video](video/preview-thumbnail.png)](video/todo-dnd-preview.mp4)
+## Demo Video
+https://github.com/user-attachments/assets/2e6b1395-8642-4d6d-8ccd-bcaca46cf6c1
 
 ## 🚀 Quick Start
 
